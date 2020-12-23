@@ -1,33 +1,58 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:woocomercapp/layout/cuibt/cubit.dart';
 import 'moduels/welcome/welcome_screen.dart';
+import 'package:woocomercapp/layout/home.dart';
+import 'package:woocomercapp/moduels/welcome/welcome_screen.dart';
+import 'shared/component/components.dart';
+import 'shared/colors/colors_commn.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
-  runApp(MyApp());
+  var widget;
+
+  await initPref().then((value)
+  {
+    if(getToken() != null && getToken().length > 0)
+    {
+      print('---- token exist');
+      widget = Home_Screen();
+    }
+    else
+    {
+      print('---- token not exist');
+      widget = Welcome_screen();
+    }
+  });
+
+  runApp(MyApp(widget));
+
 }
 
 class MyApp extends StatelessWidget {
+  var widget;
+
+  MyApp(this.widget);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner:false,
-
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey,
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    initApp();
+    return MultiBlocProvider(
+      providers:
+      [
+        BlocProvider(
+          create: (context) => Homecubit(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner:false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: defultColor,
+          primarySwatch: Colors.blue,
+        ),
+        home: widget,
       ),
-      home: Welcome_screen(),
     );
   }
 }

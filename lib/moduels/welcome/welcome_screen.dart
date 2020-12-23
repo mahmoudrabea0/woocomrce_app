@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woocomercapp/moduels/register/register_screen.dart';
 import '../../shared/component/components.dart';
 import 'package:woocomercapp/shared/colors/colors_commn.dart';
 import 'package:woocomercapp/moduels/login/login_screen.dart';
@@ -18,19 +19,28 @@ class Welcome_screen extends StatelessWidget {
           children: [
             logo(),
             defaultButton(
-                title: "log in",
-                onpress: () {
-                  navigateto(context, login_screen());
-                }),
-            defaultButton(
-                title: "sign up",
-                onpress: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => login_screen(),
-                      ));
-                }),
+              text: 'login',
+              function: ()
+              {
+                navigateTo(context, login_screen());
+              },
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Container(
+              child: defaultButton(
+                text: 'register',
+                function: ()
+                {
+                  navigateTo(context, Register_screen());
+
+                },
+              ),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
             SizedBox(
               height: 20,
             ),
