@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:woocomercapp/shared/colors/colors_commn.dart';
 import 'package:woocomercapp/shared/network/remote/dio_helper.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 Widget defaultButton({
   Color background = defultButtonColor,
@@ -187,111 +189,167 @@ void buildProgress({
       ),
     );
 
-Widget defaultAppbar(title) => AppBar(
-       toolbarHeight: 100,
-       backgroundColor: defultColor ,
-      title: new Text(title,style: TextStyle(color: appbaritems),),
+Widget defaultAppbar() => AppBar(
+      elevation: 0.0,
+      backgroundColor: defultColor,
       actions: [
 // action button
         IconButton(
-          icon: Icon(Icons.notifications,color: appbaritems,),
+          icon: Icon(
+            Icons.notifications,
+            color: appbaritems,
+          ),
           onPressed: () {},
         ),
       ],
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios,color: appbaritems,),
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: appbaritems,
+        ),
         onPressed: () {},
       ),
     );
 
 // courses containers
 
-Widget coursecontainer({IconData icon, String title ,Function onpress}) => Container(
-  decoration: BoxDecoration(
-    color:defultColor ,
-    borderRadius: BorderRadius.all(Radius.circular(24)),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 5,
-        blurRadius: 10,
-        offset: Offset(0,3)
-      )
-    ]
-
-  ),
-    margin: EdgeInsets.all(16),
-    height: 155,
-    width: 155,
-    child: GestureDetector(
-      onTap: onpress,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(icon,color: defultButtonColor),
-          SizedBox(height: 10),
-          Text(title , style: TextStyle(color:Colors.black),)
-        ],
-      ),
-    )
-);
-
-
-Widget coursecontainer2({IconData icon, String title, String descreption,Function onpress}) => Container(
-    decoration: BoxDecoration(
-        color:defultColor ,
-        borderRadius: BorderRadius.all(Radius.circular(24)),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 10,
-              offset: Offset(0,3)
-          )
-        ]
-
-    ),
-    margin: EdgeInsets.all(16),
-    padding: EdgeInsets.all(10),
-
-    height: 90,
-    width: double.infinity,
-    child: GestureDetector(
-      onTap: onpress,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-          CircleAvatar(
-            backgroundColor: Color.fromRGBO(155, 93, 229,1),
-            radius: 20,
-
-              child: Icon(icon,color: Colors.white,size: 20,)
-          ),
-          SizedBox(width: 10),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title , style: TextStyle(color:Colors.black,fontSize: 19),),
-              SizedBox(width: 10),
-              Container( width: 156,child: Text(descreption , style: TextStyle(color:Colors.grey,fontSize:9),maxLines: 2,)),
-            ],
-          ),
-          SizedBox(width: 10),
-          Column(
+Widget coursecontainer({IconData icon, String title, Function onpress}) =>
+    Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 10,
+                  offset: Offset(0, 3))
+            ]),
+        margin: EdgeInsets.all(16),
+        height: 155,
+        width: 155,
+        child: GestureDetector(
+          onTap: onpress,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container( height: 15,width: 90,child: Text("Total Ratings" , style: TextStyle(color:Colors.black,fontSize: 10),)),
-              SizedBox(width: 10),
-              Container(height: 4,child: Icon(Icons.star_rate_outlined)),
+              Icon(icon, color: defultButtonColor),
+              SizedBox(height: 10),
+              Text(
+                title,
+                style: TextStyle(color: Colors.black),
+              )
             ],
           ),
-        ],
-      ),
-    )
-);
+        ));
 
+Widget coursecontainer2(
+       course) =>
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0,vertical:8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.0,),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        padding: EdgeInsets.symmetric(vertical: 5.0,),
+        child: ExpansionTileCard(
+          trailing: Text(""),
+          baseColor: Colors.white,
+          expandedColor: Colors.white,
+          elevation: 0.0,
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 25.0,
+                child: Image.network(course['image']),
+              ),
+              SizedBox(
+                width: 15.0,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:
+                  [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            course['title'],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        RatingBar.builder(
+                          initialRating: 4.5,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemSize: 10.0,
+                          ignoreGestures: true,
+                          itemPadding: EdgeInsets.zero,
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          onRatingUpdate: (rating)
+                          {
+                            print(rating);
+                          },
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                     course['description'],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          onExpansionChanged: (value)
+          {
+
+          },
+          children: <Widget>[
+            Text('test'),
+          ],
+        ),
+      ),
+    );
+
+Widget buildSettingItem({@required title,@required function}) => Column(
+  children: [
+    SizedBox(
+      height: 1.0,
+    ),
+    ListTile(
+      tileColor: Colors.white,
+      onTap: function,
+      title: Text(
+        title.toString(),
+      ),
+      trailing: Icon(
+        Icons.arrow_forward_ios,
+        size: 14.0,
+      ),
+    ),
+  ],
+);

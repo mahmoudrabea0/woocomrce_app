@@ -3,11 +3,18 @@ import 'package:woocomercapp/shared/component/components.dart';
 class Courses_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: defaultAppbar('courses'),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                "Search Courses",
+                style: TextStyle(fontSize: 34),
+              ),
+            ),
             Container(
               height: 190,
               child: ListView(
@@ -19,14 +26,14 @@ class Courses_screen extends StatelessWidget {
               ],
               ),
             ),
+           /* coursecontainer2(im: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
             coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
             coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
             coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
-            coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
-            coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),
+            coursecontainer2(icon: Icons.star,title: "CSS", descreption: "Learn CSS for the first time or increase your knowledge as a web developer. "),*/
           ],
         ),
-      ),
+
     );
   }
 }

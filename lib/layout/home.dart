@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:woocomercapp/layout/cuibt/cubit.dart';
 import 'package:woocomercapp/layout/cuibt/states.dart';
 import 'package:woocomercapp/shared/colors/colors_commn.dart';
+import 'package:woocomercapp/shared/component/components.dart';
 class Home_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class Home_Screen extends StatelessWidget {
     },
         builder:(context,state){
           return Scaffold(
+            appBar: defaultAppbar(),
             body: Homecubit.get(context).wiget[Homecubit.get(context).currentindex],
             bottomNavigationBar: BottomNavigationBar(
               items: [
