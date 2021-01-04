@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:woocomercapp/moduels/search/cubit/states.dart';
 import 'package:woocomercapp/shared/network/remote/dio_helper.dart';
 import 'package:woocomercapp/shared/component/components.dart';
-import 'package:woocomercapp/shared/network/checckInternetcoonection.dart';
 
 class Searchcubit extends Cubit<SearchStates>{
 
@@ -31,12 +30,7 @@ class Searchcubit extends Cubit<SearchStates>{
       }
       emit(SearchSuccessState());
     }).catchError((e){
-      emit(SearchFailedState(e));
-      getconection().then((value){
-        if(value == false){
-          emit(SearchFailedState("No Internet Connection"));
-        }
-      });
+      emit(SearchFailedState("Something went wrong. Maybe No Internet Connection"));
 
     });
   }

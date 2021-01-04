@@ -15,7 +15,9 @@ class Search_screen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => Searchcubit(),
       child:
-          BlocConsumer<Searchcubit, SearchStates>(listener: (context, state) {
+          BlocConsumer<Searchcubit, SearchStates>(
+
+              listener: (context, state) {
                  if(state is SearchFailedState){
                    error = state.error.toString();
                  }
@@ -30,7 +32,7 @@ class Search_screen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                "Search Courses",
+                "Search ",
                 style: TextStyle(fontSize: 34),
               ),
             ),

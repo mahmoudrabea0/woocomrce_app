@@ -10,11 +10,11 @@ class Setting_screen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Text(
-            "Search Courses",
+            "Settings",
             style: TextStyle(fontSize: 34),
           ),
         ),
-        buildSettingItem(title: "Acount Setting",function:(){}),
+        buildSettingItem(title: "Account Setting",function:(){}),
         buildSettingItem(title: 'Push Notifications',function:(){}),
         buildSettingItem(title:'About Us' ,function:(){}),
         buildSettingItem(title: 'FAQ' ,function:(){}),

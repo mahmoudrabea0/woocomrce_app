@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:woocomercapp/layout/cuibt/cubit.dart';
+import 'package:woocomercapp/shared/network/cheackinternet/cubit/cubit.dart';
 import 'moduels/welcome/welcome_screen.dart';
 import 'package:woocomercapp/layout/home.dart';
 import 'package:woocomercapp/moduels/welcome/welcome_screen.dart';
@@ -42,6 +43,10 @@ class MyApp extends StatelessWidget {
       [
         BlocProvider(
           create: (context) => Homecubit(),
+
+        ),
+        BlocProvider(
+          create: (context) => Internetcubit()..getconection(),
         ),
       ],
       child: MaterialApp(

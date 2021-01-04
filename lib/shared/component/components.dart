@@ -247,7 +247,7 @@ Widget coursecontainer({IconData icon, String title, Function onpress}) =>
 Widget coursecontainer2(
        course) =>
     Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0,vertical:8),
+      padding: EdgeInsets.symmetric(horizontal: 20.0,vertical:15),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -255,7 +255,7 @@ Widget coursecontainer2(
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
+              spreadRadius:5,
               blurRadius: 10,
             ),
           ],
